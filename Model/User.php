@@ -48,6 +48,17 @@ class User {
         }
     }
 
+    public function updatePassword($password) {
+        try {
+            $query = $this->db->prepare("UPDATE user SET password = :password WHERE id = :id");
+            $query->bindParam(':id', $this->getId());
+            $query->bindParam(':password', $password);
+            return $query->execute();
+        }catch(\Exception $e) {
+            return null;
+        }
+    }
+
     public function getName() {
         return $this->user->name;
     }

@@ -35,8 +35,13 @@
             $errors['current_password'][] = 'Password Invalid';
         }
 
-        if(count($errors) === 0) {
+        if( countErrors($errors) && $new_password !== $confirm_password) {
+            $errors['current_password'][] = 'The new password does not match';
+        }
+
+        if(countErrors($errors) === 0) {
             $success = true;
+            $user->updatePassword(password($new_password));
         }
     }
 
@@ -51,7 +56,7 @@
         <p>Changes saved correctly</p>
     <?php else: ?>
         <pre style='border: 1px solid #ddd;background: #eee;padding: 10px'>
-            <?php count($errors) > 0 ? trim(print_r($errors)) : null; ?>
+            <?php countErrors($errors) > 0 ? trim(print_r($errors)) : null; ?>
         </pre>
     <?php endif; ?>
 

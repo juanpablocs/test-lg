@@ -18,3 +18,11 @@ function sanitize_request($post) {
 function password($pass) {
     return password_hash($pass, PASSWORD_BCRYPT);
 }
+
+function countErrors($errors) {
+    $success = 0;
+    foreach($errors as $err) {
+        $success+= count($err);
+    }
+    return $success;
+}
