@@ -35,7 +35,7 @@
             $errors['current_password'][] = 'Password Invalid';
         }
 
-        if( countErrors($errors) && $new_password !== $confirm_password) {
+        if( countErrors($errors) === 0 && $new_password !== $confirm_password) {
             $errors['current_password'][] = 'The new password does not match';
         }
 
