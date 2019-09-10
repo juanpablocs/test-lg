@@ -19,6 +19,12 @@ class PasswordValidator {
         if($this->shouldAlphanumericValid()) {
             $this->errors[] = 'Alphanumeric (a combination of letters and numbers)';
         }
+        if($this->shouldOneCapitalLetter()) {
+            $this->errors[] = 'There needs to be al least one capital letter';
+        }
+        if($this->shouldEspecialChar()) {
+            $this->errors[] = 'The use of special characters (@, #, $) is mandatory';
+        }
     }
 
     public function getErrors() {
@@ -39,5 +45,13 @@ class PasswordValidator {
             $error = false;
         }
         return $error;
+    }
+
+    public function shouldOneCapitalLetter() {
+        return !preg_match('#[A-Z]#', $this->password);
+    }
+
+    public function shouldEspecialChar() {
+        return !preg_match('/[@#$]/', $this->password);
     }
 }
