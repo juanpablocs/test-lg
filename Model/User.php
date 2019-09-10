@@ -13,7 +13,7 @@ class User {
         try {
             $this->db = new \PDO('mysql:host=' . MYSQL_SERVER . ';dbname=' . MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
         }catch(\PDOException $e) {
-            throw new Exception('Error mysql Database ' . $e->getMessage());
+            throw new \Exception('Error mysql Database ' . $e->getMessage());
         }
 
         if($id) {
