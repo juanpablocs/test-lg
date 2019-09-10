@@ -4,7 +4,7 @@
  * sanitize post request
  * remove html tag
  * clear spaces
- * @param array
+ * @param $post array
  * @return array
  */
 function sanitize_request($post) {
@@ -15,10 +15,20 @@ function sanitize_request($post) {
     return $new_post;
 }
 
+/**
+ * Encrypt password function
+ * @param $pass string
+ * @return string
+ */
 function password($pass) {
     return password_hash($pass, PASSWORD_BCRYPT);
 }
 
+/**
+ * Count errors array
+ * @param $errors array
+ * @return int
+ */
 function countErrors($errors) {
     $success = 0;
     foreach($errors as $err) {

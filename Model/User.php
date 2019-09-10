@@ -21,10 +21,19 @@ class User {
         }
     }
 
+    /**
+     * Valid user exist
+     * @return boolean
+     */
     public function exist() {
         return (bool) $this->user;
     }
 
+    /**
+     * Search user by id
+     * @param $id integer
+     * @return void
+     */
     public function find($id) {
         try {
             $query = $this->db->prepare("SELECT * FROM user WHERE id=:id LIMIT 1");
@@ -36,7 +45,13 @@ class User {
             return null;
         }
     }
-    
+
+    /**
+     * Create user
+     * @param $name string
+     * @param $password string
+     * @return bool
+     */
     public function create($name, $password) {
         try {
             $query = $this->db->prepare("INSERT INTO user (name, password) VALUES (:name, :password)");
@@ -44,10 +59,15 @@ class User {
             $query->bindParam(':password', $password);
             return $query->execute();
         }catch(\Exception $e) {
-            return null;
+            return false;
         }
     }
 
+    /**
+     * Update password
+     * @param $password string
+     * @return bool
+     */
     public function updatePassword($password) {
         try {
             $query = $this->db->prepare("UPDATE user SET password = :password WHERE id = :id");
@@ -55,18 +75,30 @@ class User {
             $query->bindParam(':password', $password);
             return $query->execute();
         }catch(\Exception $e) {
-            return null;
+            return false;
         }
     }
 
+    /**
+     * Get User Name
+     * @return string
+     */
     public function getName() {
         return $this->user->name;
     }
 
+    /**
+     * Get User Id
+     * @return integer
+     */
     public function getId() {
         return (int)$this->user->id;
     }
 
+    /**
+     * Get User Password
+     * @return string
+     */
     public function getPassword() {
         return $this->user->password;
     }
